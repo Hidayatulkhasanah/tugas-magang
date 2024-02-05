@@ -11,35 +11,47 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function showProducts()
-{
-    // Fetch products from the API
-    $response = Http::get('https://6651-114-122-108-157.ngrok-free.app/api/v1/product/');
-    $products = $response->json()['data']; // Adjust this based on the actual structure of your API response
+    public function fetchData()
+    {
+    }
 
-    // Pass the products to the view
-    return view('pelanggan.product.index', compact('product'));
-}
+
+    public function showProducts()
+    {
+        // Fetch products from the API
+        $response = Http::get('https://6651-114-122-108-157.ngrok-free.app/api/v1/product/'); //ini buat get nya 
+        $products = $response->json()['data']; // Adjust this based on the actual structure of your API response
+
+        // Pass the products to the view
+        return view('pelanggan.product.index', compact('product'));
+    }
     public function index()
     {
+        // buat get dari API yang menghasilkan response
+        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
+        $data = $response->json();
+
+        // Ambil data dari response
         return view('pelanggan.page.home', [
+            'data' => $data,
             'title' => 'Home',
         ]);
     }
 
     public function shop()
     {
+        // buat get dari API yang menghasilkan response
+        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
+        $data = $response->json();
+
+        // Ambil data dari response
         return view('pelanggan.page.shop', [
+            'data' => $data,
             'title' => 'Shop',
+
         ]);
     }
 
-    public function transaksi()
-    {
-        return view('pelanggan.page.transaksi', [
-            'title' => 'Transaksi',
-        ]);
-    }
 
     public function contact()
     {
@@ -53,22 +65,16 @@ class Controller extends BaseController
         return view('admin.dashboard');
     }
 
-    public function product()
+    public function productList()
     {
-        return view('admin.shop.index');
-    }
-}
-
-// Gunakan nama kelas yang berbeda jika ingin membuat dua kelas dengan nama yang sama
-class ApiController extends Controller
-{
-    public function fetchData()
-    {
-        // Menggunakan Guzzle HTTP client
-        $response = Http::get('https://6651-114-122-108-157.ngrok-free.app/api/v1/product/');
+        // buat get dari API yang menghasilkan response
+        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
         $data = $response->json();
 
- // Ambil data dari response
-        return view('view_name', ['data' => $data]);
+        // Ambil data dari response
+        return view('admin.shop.index', [
+            'data' => $data,
+            'title' => 'Product',
+        ]);
     }
 }

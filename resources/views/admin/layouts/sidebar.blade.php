@@ -18,7 +18,7 @@
   </li>
   
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('product') }}">
+    <a class="nav-link" href="{{ route('product-list') }}">
       <i class="nav-icon fas fa-chart-pie"></i>
       <span>Product</span></a>
   </li>
