@@ -22,14 +22,14 @@
             @foreach ($data as $db)
             @foreach ($db as $hida)
             <tr>
-                <td class="align-middle"><img src="{{ asset('assets/images/blouse.png') }}" alt="baju 1" style="width: 100%;"></td>
-                <td class="align-middle">Blouse Women Purple</td>
-                <td class="align-middle">Baju ini sangat mewah, wajib beli #HidaApprove</td>
-                <td class="align-middle">XL,L,M,S</td>
-                <td class="align-middle">Rp175.000</td>
+                <td class="align-middle"><img src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $hida['Photos'] }}"
+                <td class="align-middle">{{ $hida['Nama'] }}</td>
+                <td class="align-middle">{{ $hida['Deskripsi'] }}</td>
+                <td class="align-middle">{{ $hida['Size'] }}</td>
+                <td class="align-middle">Rp. {{ $hida['Harga'] }}</td>
                 <td class="align-middle">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('data') }}" type="button" class="btn btn-secondary">Detail</a>
+                        <a href="" type="button" class="btn btn-secondary">Detail</a>
                         <a href=""type="button" class="btn btn-warning">Edit</a>
                         <a href=""type="button" class="btn btn-danger">Delete</a>
                     </div>
