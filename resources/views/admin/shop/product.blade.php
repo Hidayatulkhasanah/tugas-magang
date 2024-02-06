@@ -12,26 +12,30 @@
                                 <legend>Add Product</legend>
                                 <div class="mb-3">
                                     <label for="TextInput" class="form-label">Nama Product</label>
-                                    <input type="text" id="TextInput" class="form-control"
-                                        placeholder="input">
+                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan Nama Product">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Select" class="form-label"></label>
+                                    <label for="TextInput" class="form-label">Deskripsi</label>
+                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan Deskripsi">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Select" class="form-label">Ukuran</label>
                                     <select id="Select" class="form-select">
-                                        <option>select</option>
+                                        <option>S</option>
+                                        <option>M</option>
+                                        <option>L</option>
+                                        <option>XL</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-                                        <label class="form-check-label" for="disabledFieldsetCheck">
-                                            Can't check this
-                                        </label>
-                                    </div>
+                                    <label for="TextInput" class="form-label">Harga</label>
+                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </fieldset>
+                                <button type="button" class="btn btn-primary" onclick="kembali()">Kembali</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
                         </form>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
