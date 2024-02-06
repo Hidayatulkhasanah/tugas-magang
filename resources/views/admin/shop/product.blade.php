@@ -1,58 +1,39 @@
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-md-12 mt-4">
-            <div class="d-flex flex-wrap gap-4 mb-4">
-                <form method="POST" action="{{ route('item.product') }}">
-                    @csrf
-                    <label for="name">Nama:</label>
-                    <input type="text" id="name" name="name" required>
+@extends('admin.layouts.app')
 
-                    <label for="description">Deskripsi:</label>
-                    <textarea id="description" name="description" required></textarea>
-
-                    <label for="ukuran">Ukuran:</label>
-                    <input type="text" id="ukuran" name="ukuran" required>
-
-                    <label for="harga">Harga:</label>
-                    <input type="text" id="harga" name="harga" required>
-
-                    <button type="submit">Tambah</button>
-                </form>
+@section('contents')
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 mt-4">
+                <div class="d-flex flex-wrap gap-4 mb-4">
+                    <form method="POST">
+                        @csrf
+                        <form>
+                            <fieldset>
+                                <legend>Add Product</legend>
+                                <div class="mb-3">
+                                    <label for="TextInput" class="form-label">Nama Product</label>
+                                    <input type="text" id="TextInput" class="form-control"
+                                        placeholder="input">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Select" class="form-label"></label>
+                                    <select id="Select" class="form-select">
+                                        <option>select</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                                        <label class="form-check-label" for="disabledFieldsetCheck">
+                                            Can't check this
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                        </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-{{-- read --}}
-@foreach ($items as $item)
-    <p>{{ $item->name }} - {{ $item->description }} - {{ $item->ukuran }} - {{ $item->harga }}</p>
-@endforeach
-
-
-{{-- update --}}
-<form method="POST" action="{{ route('items.update', $item->id) }}">
-    @csrf
-    @method('PUT')
-    <label for="name">Nama:</label>
-    <input type="text" id="name" name="name" value="{{ $item->name }}" required>
-
-    <label for="description">Deskripsi:</label>
-    <textarea id="description" name="description" required>{{ $item->description }}</textarea>
-
-    <label for="description">Ukuran:</label>
-    <textarea id="ukuran" name="ukuran" required>{{ $item->ukuran }}</textarea>
-
-    <label for="description">Harga:</label>
-    <textarea id="harga" name="harga" required>{{ $item->harga }}</textarea>
-
-    <button type="submit">Update</button>
-</form>
-
-
-{{-- delete --}}
-<form method="POST" action="{{ route('items.destroy', $item->id) }}">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Hapus</button>
-</form>
-
+@endsection

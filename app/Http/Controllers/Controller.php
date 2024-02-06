@@ -77,4 +77,10 @@ class Controller extends BaseController
             'title' => 'Product',
         ]);
     }
+    public function Addproduct()
+    {
+        return view('admin.shop.product', [
+            'title' => 'Addproduct',
+        ]);
+    }
 }
