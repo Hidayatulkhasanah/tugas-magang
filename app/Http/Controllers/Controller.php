@@ -83,4 +83,12 @@ class Controller extends BaseController
             'title' => 'Addproduct',
         ]);
     }
+
+    public function Editproduct()
+    {
+        
+        return view('admin.shop.edit', [
+            'title' => 'Editproduct',
+        ]);
+    }
 }

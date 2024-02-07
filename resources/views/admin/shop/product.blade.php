@@ -5,39 +5,92 @@
         <div class="row align-items-center">
             <div class="col-md-12 mt-4">
                 <div class="d-flex flex-wrap gap-4 mb-4">
-                    <form method="POST">
-                        @csrf
-                        <form>
-                            <fieldset>
-                                <legend>Add Product</legend>
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Nama Product</label>
-                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan Nama Product">
+                    @csrf
+                    <form id="form-add">
+                        <fieldset>
+                            <legend>Add Product</legend>
+                            <div class="mb-3">
+                                <label for="TextInput" class="form-label">Nama Product</label>
+                                <input type="text" name="nama" id="TextInput" class="form-control" placeholder="Masukkan Nama Product">
+                            </div>
+                            <div class="mb-3">
+                                <label for="TextInput" class="form-label">Deskripsi Product</label>
+                                <textarea rows='3' name="deskripsi" id="TextInput" class="form-control" placeholder="Masukkan Deskripsi Product" ></textarea>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="file" name="photo" class="form-control" id="inputGroupFile04 photo"
+                                    aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                {{-- <button class="btn btn-outline-primary" type="button"
+                                    id="inputGroupFileAddon04">Upload</button> --}}
+                            </div>
+                            <label for="TextInput" class="form-label">Ukuran</label>
+                            <div class="input-group mb-3">
+                                <select name="ukuran" class="form-select" aria-label="Ukuran">
+                                    <option selected>Pilih ukuran disini</option>
+                                    <option value="1">S</option>
+                                    <option value="2">M</option>
+                                    <option value="3">L</option>
+                                    <option value="4">XL</option>
+                                  </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="TextInput" class="form-label">Harga</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        Rp.
+                                    </span>
+                                    <input type="number" name="harga" id="TextInput" class="form-control" placeholder="Masukkan">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Deskripsi</label>
-                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan Deskripsi">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Select" class="form-label">Ukuran</label>
-                                    <select id="Select" class="form-select">
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="TextInput" class="form-label">Harga</label>
-                                    <input type="text" id="TextInput" class="form-control" placeholder="Masukkan">
-                                </div>
-                                <button type="button" class="btn btn-primary" onclick="kembali()">Kembali</button>
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
-                        </fieldset>
+                            </div>
+
+
+                            <div class="d-grid gap-2 d-md-block">
+                                <button class="btn btn-danger" type="button">Kembali</button>
+                               
+                                <button class="btn btn-primary" id="btn-submit" type="button">Simpan</button>
+                               
+                            </div>
+                    </form>
+                    </fieldset>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $('#btn-submit').on('click', function(event) {
+            event.preventDefault();
+
+            let payload = {
+                nama: $("[name='nama']").val(),
+                deskripsi: $("[name='deskripsi']").val(),
+                photo: new Blob([$("[name='photo']").prop('files')[0]], { type: 'image/png' }),
+                ukuran: $("[name='ukuran']").val(),
+                harga: Number($("[name='harga']").val())
+            }
+
+            // console.log(JSON.stringify(payload))
+            $.ajax({
+                type: 'post',
+                url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
+                data: JSON.stringify(payload),
+                success: swal.fire({
+                    title: "Tambah data sukses!",
+                    type: "success",
+                    confirmButtonText: "Tutup",
+                    closeOnConfirm: true
+                }),
+                error: (error) => {
+                    swal.fire({
+                        title: error,
+                        type: "error",
+                        confirmButtonText: "Tutup",
+                        closeOnConfirm: true
+                    })
+                }
+            })
+        });
+    </script>
 @endsection
