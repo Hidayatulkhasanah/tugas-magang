@@ -77,7 +77,7 @@
             formData.append('nama', payload.nama);
             formData.append('deskripsi', payload.deskripsi);
             formData.append('photo', payload.photo);
-            formData.append('size', payload.ukuran);
+            formData.append('size', payload.size);
             formData.append('harga', payload.harga);
 
             $.ajax({

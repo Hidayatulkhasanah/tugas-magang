@@ -32,7 +32,7 @@
                             <td class="align-middle">{{ $hida['Harga'] }}</td>
                             <td class="align-middle">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('product-edit') }}"type="button" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('product-edit', $hida['Id']) }}" type="button" class="btn btn-warning">Edit</a>
                                     <button type="button" class="btn btn-delete btn-danger" onclick="handleDelete(JSON.stringify({{ $hida['Id'] }}))">Delete</button>
                                 </div>
                             </td>
@@ -47,42 +47,46 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script>
-        const handleDelete = (data) => {
-            // Konfirmasi apakah pengguna yakin ingin menghapus
-            if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-                // Lakukan permintaan penghapusan ke server
-                $.ajax({
-                    type: 'DELETE',
-                    url: 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/' + data,
-                    success: function (response) {
-                        // Jika penghapusan berhasil, perbarui tampilan atau lakukan tindakan lain yang sesuai
-                        console.log("Produk berhasil dihapus");
-                        // Misalnya, Anda dapat memperbarui tampilan setelah menghapus produk
-                        // Contoh: location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        // Jika terjadi kesalahan saat menghapus, tampilkan pesan kesalahan
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        }
+    $(document).ready(() => {
+        getData();
+    });
 
-
-        const getData = () => {
+    const handleDelete = (data) => {
+        // Konfirmasi apakah pengguna yakin ingin menghapus
+        if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+            // Lakukan permintaan penghapusan ke server
             $.ajax({
-                type: 'get',
-                url : 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/',
-                beforeSend: (request) => {
-                    request.setRequestHeader('Access-Control-Allow-Origin', '*');
+                type: 'DELETE',
+                url: 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/' + data,
+                success: function (response) {
+                    // Jika penghapusan berhasil, perbarui tampilan atau lakukan tindakan lain yang sesuai
+                    console.log("Produk berhasil dihapus");
+                    // Misalnya, Anda dapat memperbarui tampilan setelah menghapus produk
+                    // Contoh: location.reload();
                 },
-                success: (response) => {
-                    console.log(response)
-                },
-                error: (error) => {
-                    console.error(error)
+                error: function (xhr, status, error) {
+                    // Jika terjadi kesalahan saat menghapus, tampilkan pesan kesalahan
+                    console.error(xhr.responseText);
                 }
-            }) //                        
+            });
         }
-    </script>
+    }
+
+    const getData = () => {
+        $.ajax({
+            type: 'get',
+            url : 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/',
+            beforeSend: (request) => {
+                request.setRequestHeader('Access-Control-Allow-Origin', '*');
+            },
+            success: (response) => {
+                console.log(response)
+            },
+            error: (error) => {
+                console.error(error)
+            }
+        });
+    }
+</script>
+
 @endsection

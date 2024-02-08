@@ -13,4 +13,4 @@ Route::get('/contact', [Controller::class, 'contact'])->name('contact');
 Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 Route::get('/product-list', [Controller::class, 'productList'])->name('product-list');
 Route::get('/product-add', [Controller::class, 'Addproduct'])->name('product-add');
-Route::get('/product-edit', [Controller::class, 'Editproduct'])->name('product-edit');
+Route::get('/product-edit/{id}', [Controller::class, 'Editproduct'])->name('product-edit');
