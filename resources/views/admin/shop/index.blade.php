@@ -18,23 +18,22 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="table-produk">
             @if (!empty($data) || !is_null($data))
                 @foreach ($data as $db)
                     @foreach ($db as $hida)
                         <tr>
                             <td class="align-middle">
                                 <img
-                                    src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $hida['Photos'] }}">
+                                    src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $hida['Photos'] }}"> 
                             <td class="align-middle">{{ $hida['Nama'] }}</td>
                             <td class="align-middle">{{ $hida['Deskripsi'] }}</td>
                             <td class="align-middle">{{ $hida['Size'] }}</td>
                             <td class="align-middle">{{ $hida['Harga'] }}</td>
                             <td class="align-middle">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="" type="button" class="btn btn-secondary">Detail</a>
                                     <a href="{{ route('product-edit') }}"type="button" class="btn btn-warning">Edit</a>
-                                    <button type="button" class="btn btn-delete btn-danger" onclick="handleDelete($hida)">Delete</button>
+                                    <button type="button" class="btn btn-delete btn-danger" onclick="handleDelete(JSON.stringify({{ $hida }}))">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -48,8 +47,29 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script>
+        $(document).ready(() => {
+            getData();
+        });
+
         const handleDelete = (data) => {
             console.log(data)
+            
+        }
+
+        const getData = () => {
+            $.ajax({
+                type: 'get',
+                url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
+                beforeSend: (request) => {
+                    request.setRequestHeader('Access-Control-Allow-Origin', '*');
+                },
+                success: (response) => {
+                    console.log(response)
+                },
+                error: (error) => {
+                    console.error(error)
+                }
+            }) //                        
         }
         // $('.btn-delete').on('click', function(event) {
         //     swal.fire({

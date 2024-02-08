@@ -27,10 +27,10 @@
                             <div class="input-group mb-3">
                                 <select name="ukuran" class="form-select" aria-label="Ukuran">
                                     <option selected>Pilih ukuran disini</option>
-                                    <option value="1">S</option>
-                                    <option value="2">M</option>
-                                    <option value="3">L</option>
-                                    <option value="4">XL</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
                                   </select>
                             </div>
                             <div class="mb-3">
@@ -64,17 +64,20 @@
             event.preventDefault();
 
             let payload = {
-                nama: $("[name='nama']").val(),
+                nama: $("[name='nama']").val(), 
                 deskripsi: $("[name='deskripsi']").val(),
                 photo: new Blob([$("[name='photo']").prop('files')[0]], { type: 'image/png' }),
                 ukuran: $("[name='ukuran']").val(),
                 harga: Number($("[name='harga']").val())
             }
 
-            // console.log(JSON.stringify(payload))
+            // console.log(JSON.stringify($("[name='ukuran']")))
             $.ajax({
                 type: 'post',
                 url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
+                beforeSend: (request) => {
+                    request.setRequestHeader('Access-Control-Allow-Origin', '*');
+                },
                 data: JSON.stringify(payload),
                 success: swal.fire({
                     title: "Tambah data sukses!",
