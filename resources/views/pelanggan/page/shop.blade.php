@@ -10,7 +10,7 @@
                             @foreach ($d as $product)
                                 <div class="card mx-auto" style="width: 220px;">
                                     <div class="card-header m-auto" style="border-radius: 5px;">
-                                        <img src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $product['Photos'] }}"
+                                        <img src="https://b335-116-206-14-20.ngrok-free.app/uploads/{{ $product['Photos'] }}"
                                             alt="baju 1" style="width: 100px;">
                                     </div>
                                     <div class="card-body">

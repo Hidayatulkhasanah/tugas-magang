@@ -23,14 +23,15 @@
                                 {{-- <button class="btn btn-outline-primary" type="button"
                                     id="inputGroupFileAddon04">Upload</button> --}}
                             </div>
-                            <label for="TextInput" class="form-label">Ukuran</label>
+                            <label for="TextInput" class="form-label">Size</label>
                             <div class="input-group mb-3">
-                                <select name="ukuran" class="form-select" aria-label="Ukuran">
+                                <select name="size" class="form-select" aria-label="Size">
                                     <option selected>Pilih ukuran disini</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
                                   </select>
                             </div>
                             <div class="mb-3">
@@ -60,40 +61,41 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+    $(document).ready(function() {
         $('#btn-submit').on('click', function(event) {
             event.preventDefault();
 
             let payload = {
                 nama: $("[name='nama']").val(), 
                 deskripsi: $("[name='deskripsi']").val(),
-                photo: new Blob([$("[name='photo']").prop('files')[0]], { type: 'image/png' }),
-                ukuran: $("[name='ukuran']").val(),
+                photo: $("[name='photo']").prop('files')[0], // Ambil file gambar
+                size: $("[name='size']").val(),
                 harga: Number($("[name='harga']").val())
             }
 
-            // console.log(JSON.stringify($("[name='ukuran']")))
+            let formData = new FormData();
+            formData.append('nama', payload.nama);
+            formData.append('deskripsi', payload.deskripsi);
+            formData.append('photo', payload.photo);
+            formData.append('size', payload.ukuran);
+            formData.append('harga', payload.harga);
+
             $.ajax({
-                type: 'post',
-                url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
-                beforeSend: (request) => {
-                    request.setRequestHeader('Access-Control-Allow-Origin', '*');
+                type: 'POST',
+                url : 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert("Data berhasil ditambahkan!");
+                    window.history.back();
                 },
-                data: JSON.stringify(payload),
-                success: swal.fire({
-                    title: "Tambah data sukses!",
-                    type: "success",
-                    confirmButtonText: "Tutup",
-                    closeOnConfirm: true
-                }),
-                error: (error) => {
-                    swal.fire({
-                        title: error,
-                        type: "error",
-                        confirmButtonText: "Tutup",
-                        closeOnConfirm: true
-                    })
+                error: function(xhr, status, error) {
+                    alert("Terjadi kesalahan: " + error);
                 }
-            })
+            });
         });
+    });
+
     </script>
 @endsection

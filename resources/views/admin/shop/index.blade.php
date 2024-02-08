@@ -7,15 +7,15 @@
         <a href="{{ route('product-add') }}" class="btn btn-primary">Add Product</a>
     </div>
     <br>
-    <table class="table table-hover">
+    <table class="table">
         <thead class="table-primary">
             <tr>
-                <th>Gambar</th>
-                <th>Nama</th>
-                <th>Deskripsi</th>
-                <th>Ukuran</th>
-                <th>Harga</th>
-                <th>Action</th>
+                <th scope="col">Gambar</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Ukuran</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody id="table-produk">
@@ -23,9 +23,9 @@
                 @foreach ($data as $db)
                     @foreach ($db as $hida)
                         <tr>
-                            <td class="align-middle">
+                            <td class="align-middle ">
                                 <img
-                                    src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $hida['Photos'] }}"> 
+                                    src="https://b335-116-206-14-20.ngrok-free.app/uploads/{{ $hida['Photos'] }}" class="w-25"> 
                             <td class="align-middle">{{ $hida['Nama'] }}</td>
                             <td class="align-middle">{{ $hida['Deskripsi'] }}</td>
                             <td class="align-middle">{{ $hida['Size'] }}</td>
@@ -33,7 +33,7 @@
                             <td class="align-middle">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{ route('product-edit') }}"type="button" class="btn btn-warning">Edit</a>
-                                    <button type="button" class="btn btn-delete btn-danger" onclick="handleDelete(JSON.stringify({{ $hida }}))">Delete</button>
+                                    <button type="button" class="btn btn-delete btn-danger" onclick="handleDelete(JSON.stringify({{ $hida['Id'] }}))">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -47,19 +47,32 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script>
-        $(document).ready(() => {
-            getData();
-        });
-
         const handleDelete = (data) => {
-            console.log(data)
-            
+            // Konfirmasi apakah pengguna yakin ingin menghapus
+            if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+                // Lakukan permintaan penghapusan ke server
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/' + data,
+                    success: function (response) {
+                        // Jika penghapusan berhasil, perbarui tampilan atau lakukan tindakan lain yang sesuai
+                        console.log("Produk berhasil dihapus");
+                        // Misalnya, Anda dapat memperbarui tampilan setelah menghapus produk
+                        // Contoh: location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Jika terjadi kesalahan saat menghapus, tampilkan pesan kesalahan
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
         }
+
 
         const getData = () => {
             $.ajax({
                 type: 'get',
-                url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
+                url : 'https://b335-116-206-14-20.ngrok-free.app/api/v1/product/',
                 beforeSend: (request) => {
                     request.setRequestHeader('Access-Control-Allow-Origin', '*');
                 },
@@ -71,35 +84,5 @@
                 }
             }) //                        
         }
-        // $('.btn-delete').on('click', function(event) {
-        //     swal.fire({
-        //         title: "Apakah anda ingin menghapus data ini?",
-        //         type: "warning",
-        //         showCancelButton: true,
-        //         confirmButtonText: "Yes",
-        //         closeOnConfirm: true
-        //     },
-        //     function() {
-        //         $.ajax({
-        //         type: 'post',
-        //         url : 'https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/',
-        //         data: {},
-        //         success: swal.fire({
-        //             title: "Hapus data sukses!",
-        //             type: "success",
-        //             confirmButtonText: "Tutup",
-        //             closeOnConfirm: true
-        //         }),
-        //         error: (error) => {
-        //             swal.fire({
-        //                 title: error,
-        //                 type: "error",
-        //                 confirmButtonText: "Tutup",
-        //                 closeOnConfirm: true
-        //             })
-        //         }
-        //     })
-        //     });
-        // });
     </script>
 @endsection

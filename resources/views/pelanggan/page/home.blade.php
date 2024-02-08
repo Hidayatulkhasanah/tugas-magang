@@ -11,14 +11,14 @@
                             @foreach ($d as $product)
                                 <div class="card mx-auto" style="width: 220px;">
                                     <div class="card-header m-auto" style="border-radius: 5px;">
-                                        <img src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $product['Photos'] }}"
+                                        <img src="https://b335-116-206-14-20.ngrok-free.app/uploads/{{ $product['Photos'] }}"
                                             alt="baju 1" style="width: 100px;">
                                     </div>
                                     <div class="card-body">
-                                        <p class="m-0"> {{ $product['Nama'] }} - {{ $product['Deskripsi'] }} -
-                                            {{ $product['Size'] }}
+                                        <p class="m-0"> {{ $product['Nama'] }}
                                         </p>
-                                        <p class="m-0"><i class="fa-regular fa-star"></i>5+</p>
+                                        <p>{{ $product['Deskripsi'] }}</p>
+                                        <p class="m-0">{{ $product['Size'] }}</p>
                                     </div>
                                     <div class="card-footer d-flex flex-row justify-content-between align-items-center">
                                         <p class="m-0" style="font-size: 16px; font-weight: 600;">Rp.
@@ -61,14 +61,14 @@
                             @foreach ($d as $product)
                                 <div class="card mx-auto" style="width: 220px;">
                                     <div class="card-header m-auto" style="border-radius: 5px;">
-                                        <img src="https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/{{ $product['Photos'] }}"
+                                        <img src="https://b335-116-206-14-20.ngrok-free.app/uploads/{{ $product['Photos'] }}"
                                             alt="baju 1" style="width: 100px;">
                                     </div>
                                     <div class="card-body">
-                                        <p class="m-0"> {{ $product['Nama'] }} - {{ $product['Deskripsi'] }} -
-                                            {{ $product['Size'] }}
+                                        <p class="m-0"> {{ $product['Nama'] }}
                                         </p>
-                                        <p class="m-0"><i class="fa-regular fa-star"></i>5+</p>
+                                        <p>{{ $product['Deskripsi'] }}</p>
+                                        <p class="m-0">{{ $product['Size'] }}</p>
                                     </div>
                                     <div class="card-footer d-flex flex-row justify-content-between align-items-center">
                                         <p class="m-0" style="font-size: 16px; font-weight: 600;">Rp.

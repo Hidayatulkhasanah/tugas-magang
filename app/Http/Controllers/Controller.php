@@ -19,7 +19,7 @@ class Controller extends BaseController
     public function showProducts()
     {
         // Fetch products from the API
-        $response = Http::get('https://6651-114-122-108-157.ngrok-free.app/api/v1/product/'); //ini buat get nya 
+        $response = Http::get('https://b335-116-206-14-20.ngrok-free.app/api/v1/product/'); //ini buat get nya 
         $products = $response->json()['data']; // Adjust this based on the actual structure of your API response
 
         // Pass the products to the view
@@ -28,7 +28,7 @@ class Controller extends BaseController
     public function index()
     {
         // buat get dari API yang menghasilkan response
-        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
+        $response = Http::get('https://b335-116-206-14-20.ngrok-free.app/api/v1/product/');
         $data = $response->json();
 
         // Ambil data dari response
@@ -41,7 +41,7 @@ class Controller extends BaseController
     public function shop()
     {
         // buat get dari API yang menghasilkan response
-        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
+        $response = Http::get('https://b335-116-206-14-20.ngrok-free.app/api/v1/product/');
         $data = $response->json();
 
         // Ambil data dari response
@@ -68,7 +68,7 @@ class Controller extends BaseController
     public function productList()
     {
         // buat get dari API yang menghasilkan response
-        $response = Http::get('https://38f3-2001-448a-3043-876f-c848-7a33-d392-ebb7.ngrok-free.app/api/v1/product/');
+        $response = Http::get('https://b335-116-206-14-20.ngrok-free.app/api/v1/product/');
         $data = $response->json();
 
         // Ambil data dari response
